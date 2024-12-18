@@ -1,0 +1,101 @@
+```{r}
+install.packages("car")
+library(car)
+```
+
+```{r}
+# Loading thedataset
+data(Salaries)
+str(Salaries)
+```
+```{r}
+summary(Salaries)
+```
+```{r}
+aggregate(salary ~ sex, data = Salaries, FUN = mean)
+```
+
+```{r}
+#Gender pay Gap
+boxplot(salary ~ sex, data = Salaries, main = "Gender Pay Gap",
+        xlab = "Gender", ylab = "Salaries", col = c("green", "pink"))
+```
+
+```{r}
+t.test(salary ~ sex, data = Salaries)
+```
+
+```{r}
+boxplot(salary ~ rank, data = Salaries, main = "Rank vs Salary",
+        xlab = "Rank", ylab = "Salaries", col = c("brown", "yellow", "pink"))
+```
+```{r}
+anova_model <- aov(salary ~ rank, data = Salaries)
+summary(anova_model)
+```
+
+```{r}
+plot(Salaries$yrs.service, Salaries$salary, main = "Years of Service vs Salary",
+     xlab = "Years of Service", ylab = "Salary", pch = 12, col = "seagreen")
+```
+```{r}
+cor(Salaries$yrs.service, Salaries$salary)
+```
+
+
+Exercise :02
+
+```{r}
+library(carData)
+data("TitanicSurvival")
+str(TitanicSurvival)
+```
+```{r}
+summary(TitanicSurvival)
+```
+```{r}
+contingency_table <- table(TitanicSurvival$survived, TitanicSurvival$passengerClass)
+print(contingency_table)
+```
+```{r}
+chisq_test <- chisq.test(contingency_table)
+print(chisq_test)
+```
+```{r}
+table(TitanicSurvival$sex, TitanicSurvival$survived)
+
+```
+
+```{r}
+barplot(table(TitanicSurvival$sex, TitanicSurvival$survived), beside = TRUE, col = c("pink", "lightblue"), 
+        legend = rownames(table(TitanicSurvival$sex, TitanicSurvival$survived)), main = "Survival by Gender", 
+        xlab = "Survived", ylab = "Count")
+```
+
+```{r}
+mosaicplot(contingency_table, 
+           main = "Mosaic Plot: Survived vs Class",
+           color = TRUE)
+```
+
+```{r}
+boxplot(passengerClass ~ survived, data = TitanicSurvival, 
+        main = "Survival Status by Class",
+        xlab = "Class", ylab = "Survival (1 = Yes, 0 = No)",
+        col = c("lightblue", "pink"))
+```
+
+```{r}
+contingency_table <- table(TitanicSurvival$survived, TitanicSurvival$passengerClass)
+print(contingency_table)
+```
+
+```{r}
+prop_table <- prop.table(contingency_table, margin = 2)  # Proportion within each class
+print(prop_table)
+```
+
+```{r}
+chisq_test <- chisq.test(contingency_table)
+print(chisq_test)
+```
