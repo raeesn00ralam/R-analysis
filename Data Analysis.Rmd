@@ -43,7 +43,6 @@ cor(Salaries$yrs.service, Salaries$salary)
 ```
 
 
-Exercise :02
 
 ```{r}
 library(carData)
